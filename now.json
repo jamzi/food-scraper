@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "name": "food-scraper",
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@now/node",
+      "config": { "maxLambdaSize": "50mb" }
+    },
+    {
+      "src": "package.json",
+      "use": "@now/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api",
+      "headers": { "cache-control": "s-maxage=1800, max-age=0" }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
