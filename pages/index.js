@@ -118,6 +118,11 @@ const initialRestaurants = [
     id: "rozaSlon",
     name: "Roza Slon",
     menuItems: undefined
+  },
+  {
+    id: "gostilna1987",
+    name: "Gostilna 1987",
+    menuItems: undefined
   }
 ];
 
@@ -135,6 +140,11 @@ const Index = props => {
       );
 
       const data = await response.json();
+
+      if (restaurant.id === "gostilna1987") {
+        console.log(data);
+      }
+
       setRestaurants(restaurants => {
         const newRestaurants = [...restaurants];
         let restaurant = newRestaurants.find(r => r.id === data.id);

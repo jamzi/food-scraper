@@ -122,6 +122,24 @@ function rozaSlon(response) {
   };
 }
 
+function gostilna1987(response) {
+  const $ = cheerio.load(response);
+
+  const menuItems = $(".is-selected .wpb_wrapper > p")
+    .map((i, el) => {
+      return $(el)
+        .text()
+        .replace(/\*/g, "");
+    })
+    .get();
+
+  return {
+    id: "gostilna1987",
+    name: "Gostilna 1987",
+    menuItems: menuItems.slice(1, menuItems.length)
+  };
+}
+
 module.exports = {
   vinka,
   gastro,
@@ -129,5 +147,6 @@ module.exports = {
   favola,
   piap,
   barbado,
-  rozaSlon
+  rozaSlon,
+  gostilna1987
 };

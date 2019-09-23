@@ -17,7 +17,8 @@ const requestUrls = {
   barbado: "http://www.barbado.si/",
   piap: "http://www.piap.si/jedilnik",
   favola: "http://www.kaval-group.si/FAVOLA,,ponudba/kosila",
-  rozaSlon: "http://www.rozaslon.si/ponudba/"
+  rozaSlon: "http://www.rozaslon.si/ponudba/",
+  gostilna1987: "https://gostilna1987.si/"
 };
 
 module.exports = async function(req, res) {
