@@ -18,7 +18,8 @@ const requestUrls = {
   piap: "http://www.piap.si/jedilnik",
   favola: "http://www.kaval-group.si/FAVOLA,,ponudba/kosila",
   rozaSlon: "http://www.rozaslon.si/ponudba/",
-  gostilna1987: "https://gostilna1987.si/"
+  gostilna1987: "https://gostilna1987.si/",
+  vivo: "https://www.vivo.si/vivo-d125-jedilnik/"
 };
 
 module.exports = async function(req, res) {

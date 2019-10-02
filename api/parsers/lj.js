@@ -140,6 +140,26 @@ function gostilna1987(response) {
   };
 }
 
+function vivo(response) {
+  const $ = cheerio.load(response);
+
+  const menuItems = $(
+    ".wpb_column.vc_column_container.vc_col-sm-8 .wpb_wrapper > p"
+  )
+    .map((i, el) => {
+      return $(el)
+        .text()
+        .replace(/\*/g, "");
+    })
+    .get();
+
+  return {
+    id: "vivo",
+    name: "VIVO D125",
+    menuItems: menuItems
+  };
+}
+
 module.exports = {
   vinka,
   gastro,
@@ -148,5 +168,6 @@ module.exports = {
   piap,
   barbado,
   rozaSlon,
-  gostilna1987
+  gostilna1987,
+  vivo
 };

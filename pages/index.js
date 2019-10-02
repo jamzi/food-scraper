@@ -24,7 +24,7 @@ const styles = theme => ({
     gridTemplateColumns: "1fr 1fr 1fr 1fr",
     gridTemplateRows: "1fr 1fr 1fr 1fr",
     gridTemplateAreas:
-      '"vinka gastro piap rozaslon" "vinka gastro favola rozaslon" "vinka barbado restavracija123 gostilna1987" "vinka barbado restavracija123 gostilna1987"',
+      '"vinka gastro piap rozaslon" "vinka barbado favola rozaslon" "vinka vivo restavracija123 gostilna1987" "vinka vivo restavracija123 gostilna1987"',
     [theme.breakpoints.down("md")]: {
       display: "flex",
       flexWrap: "wrap"
@@ -73,6 +73,11 @@ const styles = theme => ({
   },
   gostilna1987: {
     gridArea: "gostilna1987",
+    width: "calc(100% - 20px)",
+    height: "calc(100% - 20px)"
+  },
+  vivo: {
+    gridArea: "vivo",
     width: "calc(100% - 20px)",
     height: "calc(100% - 20px)"
   },
@@ -127,6 +132,11 @@ const initialRestaurants = [
   {
     id: "gostilna1987",
     name: "Gostilna 1987",
+    menuItems: undefined
+  },
+  {
+    id: "vivo",
+    name: "VIVO D125",
     menuItems: undefined
   }
 ];
