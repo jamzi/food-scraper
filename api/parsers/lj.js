@@ -156,7 +156,7 @@ function vivo(response) {
   const currentDate = new Date();
   const dateOfTheWeek = currentDate.getDay();
 
-  const mapper = {
+  const dayMapper = {
     1: ["PONEDELJEK", "TOREK"],
     2: ["TOREK", "SREDA"],
     3: ["SREDA", "ČETRTEK"],
@@ -164,7 +164,7 @@ function vivo(response) {
     5: ["PETEK", "SOBOTA"]
   };
 
-  const todayMapper = mapper[dateOfTheWeek];
+  const todayMapper = dayMapper[dateOfTheWeek];
 
   let startIndex;
   let endIndex;
