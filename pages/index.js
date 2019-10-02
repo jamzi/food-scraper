@@ -24,7 +24,7 @@ const styles = theme => ({
     gridTemplateColumns: "1fr 1fr 1fr 1fr",
     gridTemplateRows: "1fr 1fr 1fr 1fr",
     gridTemplateAreas:
-      '"vinka gastro piap rozaslon" "vinka gastro favola rozaslon" "vinka barbado restavracija123 rozaslon" "vinka barbado restavracija123 rozaslon"',
+      '"vinka gastro piap rozaslon" "vinka gastro favola rozaslon" "vinka barbado restavracija123 gostilna1987" "vinka barbado restavracija123 gostilna1987"',
     [theme.breakpoints.down("md")]: {
       display: "flex",
       flexWrap: "wrap"
@@ -68,6 +68,11 @@ const styles = theme => ({
   },
   rozaSlon: {
     gridArea: "rozaslon",
+    width: "calc(100% - 20px)",
+    height: "calc(100% - 20px)"
+  },
+  gostilna1987: {
+    gridArea: "gostilna1987",
     width: "calc(100% - 20px)",
     height: "calc(100% - 20px)"
   },
