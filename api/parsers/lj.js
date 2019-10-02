@@ -1,4 +1,4 @@
-const cheerio = require("cheerio");
+import cheerio from "cheerio";
 
 function vinka(response) {
   const $ = cheerio.load(response, { decodeEntities: false });
@@ -196,7 +196,7 @@ function vivo(response) {
   };
 }
 
-module.exports = {
+export default {
   vinka,
   gastro,
   restavracija123,

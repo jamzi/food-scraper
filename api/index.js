@@ -1,4 +1,4 @@
-const chrome = require("chrome-aws-lambda");
+import chrome from "chrome-aws-lambda";
 
 const isProd = process.env.NODE_ENV === "production";
 let puppeteer;
@@ -8,7 +8,7 @@ if (isProd) {
   puppeteer = require("puppeteer");
 }
 
-const parsers = require("./parsers/lj");
+import parsers from "./parsers/lj";
 
 const requestUrls = {
   vinka: "https://www.vinka.si/malice-in-kosila.html",
@@ -22,7 +22,7 @@ const requestUrls = {
   vivo: "https://www.vivo.si/vivo-d125-jedilnik/"
 };
 
-module.exports = async function(req, res) {
+export default async function(req, res) {
   const { restaurantId } = req.query;
   const url = requestUrls[restaurantId];
 
@@ -69,4 +69,4 @@ module.exports = async function(req, res) {
   } finally {
     browser.close();
   }
-};
+}
