@@ -153,10 +153,36 @@ function vivo(response) {
     })
     .get();
 
+  const currentDate = new Date();
+  const dateOfTheWeek = currentDate.getDay();
+
+  const mapper = {
+    1: ["PONEDELJEK", "TOREK"],
+    2: ["TOREK", "SREDA"],
+    3: ["SREDA", "ČETRTEK"],
+    4: ["ČETRTEK", "PETEK"],
+    5: ["PETEK", "SOBOTA"]
+  };
+
+  const todayMapper = mapper[dateOfTheWeek];
+
+  let startIndex;
+  let endIndex;
+  menuItems.forEach((item, i) => {
+    if (item.includes(todayMapper[0])) {
+      startIndex = i;
+    }
+    if (item.includes(todayMapper[1])) {
+      endIndex = i;
+    }
+  });
+
+  const dailyMenu = menuItems.slice(startIndex + 1, endIndex);
+
   return {
     id: "vivo",
     name: "VIVO D125",
-    menuItems: menuItems
+    menuItems: dailyMenu
   };
 }
 
