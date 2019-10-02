@@ -143,15 +143,23 @@ function gostilna1987(response) {
 function vivo(response) {
   const $ = cheerio.load(response);
 
-  const menuItems = $(
-    ".wpb_column.vc_column_container.vc_col-sm-8 .wpb_wrapper > p"
-  )
+  const menuItemsMonThu = $(".widget.widget_text .wpb_wrapper > p")
     .map((i, el) => {
       return $(el)
         .text()
         .replace(/\*/g, "");
     })
     .get();
+
+  const menuItemsFri = $(".widget.widget_text .wpb_content_element > p")
+    .map((i, el) => {
+      return $(el)
+        .text()
+        .replace(/\*/g, "");
+    })
+    .get();
+
+  const menuItems = [...menuItemsMonThu, ...menuItemsFri];
 
   const currentDate = new Date();
   const dateOfTheWeek = currentDate.getDay();
@@ -164,20 +172,22 @@ function vivo(response) {
     5: ["PETEK", "SOBOTA"]
   };
 
-  const todayMapper = dayMapper[dateOfTheWeek];
+  const [today, tomorrow] = dayMapper[dateOfTheWeek];
 
-  let startIndex;
-  let endIndex;
+  let startIndex = 0;
+  let endIndex = menuItems.length - 1;
+
   menuItems.forEach((item, i) => {
-    if (item.includes(todayMapper[0])) {
-      startIndex = i;
+    const uppercasedItem = item.toUpperCase();
+    if (uppercasedItem.includes(today)) {
+      startIndex = i + 1;
     }
-    if (item.includes(todayMapper[1])) {
+    if (uppercasedItem.includes(tomorrow)) {
       endIndex = i;
     }
   });
 
-  const dailyMenu = menuItems.slice(startIndex + 1, endIndex);
+  const dailyMenu = menuItems.slice(startIndex, endIndex);
 
   return {
     id: "vivo",
