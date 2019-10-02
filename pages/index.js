@@ -146,10 +146,6 @@ const Index = props => {
 
       const data = await response.json();
 
-      if (restaurant.id === "gostilna1987") {
-        console.log(data);
-      }
-
       setRestaurants(restaurants => {
         const newRestaurants = [...restaurants];
         let restaurant = newRestaurants.find(r => r.id === data.id);
