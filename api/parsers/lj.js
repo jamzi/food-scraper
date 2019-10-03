@@ -8,11 +8,7 @@ function vinka(response) {
     .split("Poletna ponudba")[0]
     .split("<br>");
 
-  return {
-    id: "vinka",
-    name: "Vinka",
-    menuItems
-  };
+  return menuItems;
 }
 
 function gastro(response) {
@@ -23,27 +19,21 @@ function gastro(response) {
     menuItems.push($(elm).text());
   });
 
-  return {
-    id: "gastro",
-    name: "Gastro House 151",
-    menuItems
-  };
+  return menuItems;
 }
 
 function restavracija123(data) {
   const $ = cheerio.load(data);
-  return {
-    id: "restavracija123",
-    name: "Restavracija 123",
-    menuItems: $(".jed-levo")
-      .map((i, el) => {
-        const title = $(el)
-          .find(".jed-title")
-          .text();
-        return title;
-      })
-      .get()
-  };
+  const menuItems = $(".jed-levo")
+    .map((i, el) => {
+      const title = $(el)
+        .find(".jed-title")
+        .text();
+      return title;
+    })
+    .get();
+
+  return menuItems;
 }
 
 function favola(response) {
@@ -51,15 +41,13 @@ function favola(response) {
   const dateOfTheWeek = currentDate.getDay();
 
   const $ = cheerio.load(response, { decodeEntities: false });
-  return {
-    id: "favola",
-    name: "Favola",
-    menuItems: $(`.show.show-${dateOfTheWeek - 1} > p`)
-      .map((i, el) => {
-        return i % 2 === 0 ? $(el).html() : "";
-      })
-      .get()
-  };
+  const menuItems = $(`.show.show-${dateOfTheWeek - 1} > p`)
+    .map((i, el) => {
+      return i % 2 === 0 ? $(el).html() : "";
+    })
+    .get();
+
+  return menuItems;
 }
 
 function piap(response) {
@@ -70,11 +58,7 @@ function piap(response) {
     })
     .get();
 
-  return {
-    id: "piap",
-    name: "Piap",
-    menuItems
-  };
+  return menuItems;
 }
 
 function barbado(response) {
@@ -85,11 +69,7 @@ function barbado(response) {
     })
     .get();
 
-  return {
-    id: "barbado",
-    name: "Barbado",
-    menuItems
-  };
+  return menuItems;
 }
 
 function rozaSlon(response) {
@@ -115,11 +95,7 @@ function rozaSlon(response) {
     });
   });
 
-  return {
-    id: "rozaSlon",
-    name: "Roza Slon",
-    menuItems
-  };
+  return menuItems;
 }
 
 function gostilna1987(response) {
@@ -133,11 +109,7 @@ function gostilna1987(response) {
     })
     .get();
 
-  return {
-    id: "gostilna1987",
-    name: "Gostilna 1987",
-    menuItems: menuItems.slice(1, menuItems.length)
-  };
+  return menuItems.slice(1, menuItems.length);
 }
 
 function vivo(response) {
@@ -187,13 +159,7 @@ function vivo(response) {
     }
   });
 
-  const dailyMenu = menuItems.slice(startIndex, endIndex);
-
-  return {
-    id: "vivo",
-    name: "VIVO D125",
-    menuItems: dailyMenu
-  };
+  return menuItems.slice(startIndex, endIndex);
 }
 
 module.exports = {
