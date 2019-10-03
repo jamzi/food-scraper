@@ -1,3 +1,6 @@
+import { withStyles } from "@material-ui/styles";
+import Link from "@material-ui/core/Link";
+
 const styles = theme => {
   return {
     root: {
@@ -46,5 +49,12 @@ const styles = theme => {
     }
   };
 };
+
+export const StyledLink = withStyles({
+  root: {
+    cursor: "pointer",
+    color: "rgba(0, 0, 0, 0.87)"
+  }
+})(Link);
 
 export default styles;

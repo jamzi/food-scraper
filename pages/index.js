@@ -6,7 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { format, isAfter } from "date-fns";
 
 import initialRestaurants from "../constants/restaurants";
-import styles from "../components/styles";
+import styles, { StyledLink } from "../components/styles";
 
 const Index = props => {
   const { classes } = props;
@@ -80,13 +80,14 @@ const Index = props => {
               className={classes.restaurantItem}
               key={restaurant.id}
             >
-              <Typography
+              <StyledLink
                 variant="h5"
                 component="h3"
                 classes={{ root: classes.restaurantName }}
+                onClick={() => window.open(restaurant.url, "_blank")}
               >
                 {restaurant.name}
-              </Typography>
+              </StyledLink>
               {restaurant.menuItems ? (
                 restaurant.menuItems
                   .filter(m => m)
@@ -111,4 +112,4 @@ const Index = props => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Index);
+export default withStyles(styles)(Index);
