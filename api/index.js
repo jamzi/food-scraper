@@ -45,7 +45,7 @@ module.exports = async function(req, res) {
     await page.goto(url);
 
     try {
-      if (url === "https://www.restavracija123.si/?id=213") {
+      if (url.includes("restavracija123")) {
         await page.waitForSelector(".jed-levo", { timeout: 3000 });
       }
       const content = await page.content();
