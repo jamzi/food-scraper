@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import api from "./api";
+const express = require("express");
+const cors = require("cors");
+const api = require("./api");
 
 const server = express();
 const port = 9999;

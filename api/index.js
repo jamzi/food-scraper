@@ -1,4 +1,4 @@
-import chrome from "chrome-aws-lambda";
+const chrome = require("chrome-aws-lambda");
 
 const isProd = process.env.NODE_ENV === "production";
 let puppeteer;
@@ -8,19 +8,16 @@ if (isProd) {
   puppeteer = require("puppeteer");
 }
 
-import parsers from "./parsers/lj";
-import resturants from "../constants/restaurants";
+const parsers = require("./parsers/lj");
 
-export default async function(req, res) {
-  const { restaurantId } = req.query;
+module.exports = async function(req, res) {
+  const { id, url } = req.query;
 
-  const restaurant = resturants.find(r => r.id === restaurantId);
-  if (!restaurant) {
+  if (!id) {
     res.statusCode = 500;
     res.setHeader("Content-Type", "text/html");
     res.end("<h1>Server Error</h1><p>Unknown restaurant</p>");
   }
-  console.log("restaurant:", restaurant);
 
   let browser;
   try {
@@ -45,17 +42,16 @@ export default async function(req, res) {
       }
     });
 
-    console.log("restaurant.url:", restaurant.url);
-    await page.goto(restaurant.url);
+    await page.goto(url);
 
     try {
-      if (url === "https://www.restavracija123.si/?restaurantid=213") {
+      if (url === "https://www.restavracija123.si/?id=213") {
         await page.waitForSelector(".jed-levo", { timeout: 3000 });
       }
       const content = await page.content();
-      console.log("content:", content);
-      const data = parsers[restaurantId](content);
-      res.json(data);
+
+      const menuItems = parsers[id](content);
+      res.json({ id: id, menuItems });
     } catch (e) {
       return undefined;
     }
@@ -67,4 +63,4 @@ export default async function(req, res) {
   } finally {
     browser.close();
   }
-}
+};

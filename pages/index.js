@@ -17,8 +17,8 @@ const Index = props => {
     initialRestaurants.forEach(async restaurant => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
-          ? `api/food?restaurantId=${restaurant.id}`
-          : `http://localhost:9999/api/food?restaurantId=${restaurant.id}`
+          ? `api/food?id=${restaurant.id}&url=${restaurant.url}`
+          : `http://localhost:9999/api/food?id=${restaurant.id}&url=${restaurant.url}`
       );
 
       const data = await response.json();

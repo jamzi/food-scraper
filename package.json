@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "server:dev": "nodemon -r esm server-dev.js",
+    "server:dev": "nodemon server-dev.js",
     "next:dev": "next",
     "dev": "npm-run-all --parallel server:dev next:dev",
     "now-build": "next build"
@@ -21,7 +21,6 @@
     "next": "^9.0.4",
     "react-dom": "^16.9.0",
     "react": "^16.9.0",
-    "date-fns": "^2.1.0",
-    "esm": "3.2.25"
+    "date-fns": "^2.1.0"
   }
 }
