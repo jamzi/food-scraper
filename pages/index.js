@@ -1,20 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { withStyles } from "@material-ui/styles";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
 import { format, isAfter } from "date-fns";
 
 import initialRestaurants from "../constants/restaurants";
-import styles, { StyledLink } from "../components/styles";
+import styles from "../components/styles";
+import RestaurantGrid from "../components/restaurantGrid";
+import SelectRestaurantsDialog from "../components/dialogs/selectRestaurants";
 
 const Index = props => {
   const { classes } = props;
   const [restaurants, setRestaurants] = useState(initialRestaurants);
   const [updatedAt, setUpdatedAt] = useState(undefined);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([
+    "vinka",
+    "gastro",
+    "rozaSlon"
+  ]);
+
+  const filteredRestaurants = useMemo(() => {
+    if (!restaurants) {
+      return [];
+    }
+    return restaurants.reduce((acc, restaurant) => {
+      const blacklistIndex = blacklistedRestaurants.findIndex(
+        bId => bId === restaurant.id
+      );
+      if (blacklistIndex === -1) {
+        acc.push(restaurant);
+      }
+      return acc;
+    }, []);
+  }, [blacklistedRestaurants]);
 
   const getFood = async () => {
-    initialRestaurants.forEach(async restaurant => {
+    filteredRestaurants.forEach(async restaurant => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
           ? `api/food?id=${restaurant.id}&url=${restaurant.url}`
@@ -46,68 +68,48 @@ const Index = props => {
     });
   };
 
-  useEffect(() => {
-    getFood();
-    const interval = setInterval(() => {
-      getFood();
-    }, 30 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   getFood();
+  //   const interval = setInterval(() => {
+  //     getFood();
+  //   }, 30 * 60 * 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className={classes.root}>
       <div className={classes.topBar}>
-        <Typography
-          variant="h4"
-          component="h2"
-          classes={{ root: classes.title }}
-        >
-          <span>{`LJ Food `}</span>
-          {updatedAt && <span>{format(updatedAt, "dd.MM.yyyy")}</span>}
-        </Typography>
-        {updatedAt && (
-          <Typography variant="h6">
-            {`(updated at ${format(updatedAt, "HH:mm")}) `}
+        <div>
+          <Typography
+            variant="h4"
+            component="h2"
+            classes={{ root: classes.title }}
+          >
+            <span>{`LJ Food `}</span>
+            {updatedAt && <span>{format(updatedAt, "dd.MM.yyyy")}</span>}
           </Typography>
-        )}
+          {updatedAt && (
+            <Typography variant="h6">
+              {`(updated at ${format(updatedAt, "HH:mm")}) `}
+            </Typography>
+          )}
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setDialogOpen(true)}
+        >
+          Select Restaurants
+        </Button>
       </div>
-      <div className={classes.restaurants}>
-        {restaurants &&
-          restaurants.map(restaurant => (
-            <Paper
-              classes={{ root: classes.paper }}
-              style={{ gridArea: restaurant.id }}
-              className={classes.restaurantItem}
-              key={restaurant.id}
-            >
-              <StyledLink
-                variant="h5"
-                component="h3"
-                classes={{ root: classes.restaurantName }}
-                onClick={() => window.open(restaurant.url, "_blank")}
-              >
-                {restaurant.name}
-              </StyledLink>
-              {restaurant.menuItems ? (
-                restaurant.menuItems
-                  .filter(m => m)
-                  .map((menuItem, i) => (
-                    <Typography
-                      component="p"
-                      key={i}
-                      classes={{ root: classes.menuItem }}
-                    >
-                      - {menuItem.toLowerCase()}
-                    </Typography>
-                  ))
-              ) : (
-                <div className={classes.loaderWrapper}>
-                  <CircularProgress className={classes.progress} />
-                </div>
-              )}
-            </Paper>
-          ))}
-      </div>
+      <RestaurantGrid filteredRestaurants={filteredRestaurants} />
+      <SelectRestaurantsDialog
+        blacklistedRestaurants={blacklistedRestaurants}
+        setBlacklistedRestaurants={setBlacklistedRestaurants}
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        restaurants={restaurants}
+      />
     </div>
   );
 };

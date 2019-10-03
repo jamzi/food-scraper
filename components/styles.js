@@ -13,7 +13,8 @@ const styles = theme => {
     },
     topBar: {
       display: "flex",
-      alignItems: "flex-end",
+      alignItems: "center",
+      justifyContent: "space-between",
       marginBottom: "20px"
     },
     restaurants: {
