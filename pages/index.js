@@ -111,4 +111,4 @@ const Index = props => {
   );
 };
 
-export default withStyles(styles)(Index);
+export default withStyles(styles, { withTheme: true })(Index);
