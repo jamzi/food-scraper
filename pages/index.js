@@ -17,8 +17,19 @@ const Index = props => {
   const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([
     "vinka",
     "gastro",
-    "rozaSlon"
+    "rozaSlon",
+    "barbado",
+    "vivo",
+    "piap"
   ]);
+
+  useEffect(() => {
+    getFood();
+    const interval = setInterval(() => {
+      getFood();
+    }, 30 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [blacklistedRestaurants]);
 
   const filteredRestaurants = useMemo(() => {
     if (!restaurants) {
@@ -36,15 +47,14 @@ const Index = props => {
   }, [blacklistedRestaurants]);
 
   const getFood = async () => {
+    console.log("blacklisted:", blacklistedRestaurants);
     filteredRestaurants.forEach(async restaurant => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
           ? `api/food?id=${restaurant.id}&url=${restaurant.url}`
           : `http://localhost:9999/api/food?id=${restaurant.id}&url=${restaurant.url}`
       );
-
       const data = await response.json();
-
       setRestaurants(restaurants => {
         const newRestaurants = [...restaurants];
         let restaurant = newRestaurants.find(r => r.id === data.id);
@@ -53,7 +63,6 @@ const Index = props => {
         }
         return newRestaurants;
       });
-
       setUpdatedAt(updatedAt => {
         const dateHeader = response.headers.get("date");
         if (!dateHeader) {
@@ -67,14 +76,6 @@ const Index = props => {
       });
     });
   };
-
-  // useEffect(() => {
-  //   getFood();
-  //   const interval = setInterval(() => {
-  //     getFood();
-  //   }, 30 * 60 * 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
 
   return (
     <div className={classes.root}>
