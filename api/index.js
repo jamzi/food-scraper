@@ -9,22 +9,18 @@ if (isProd) {
 }
 
 import parsers from "./parsers/lj";
-
-const requestUrls = {
-  vinka: "https://www.vinka.si/malice-in-kosila.html",
-  gastro: "https://www.gastrohouse.si/index.php/tedenska-ponudba",
-  restavracija123: "https://www.restavracija123.si/?restaurantid=213",
-  barbado: "http://www.barbado.si/",
-  piap: "http://www.piap.si/jedilnik",
-  favola: "http://www.kaval-group.si/FAVOLA,,ponudba/kosila",
-  rozaSlon: "http://www.rozaslon.si/ponudba/",
-  gostilna1987: "https://gostilna1987.si/",
-  vivo: "https://www.vivo.si/vivo-d125-jedilnik/"
-};
+import resturants from "../constants/restaurants";
 
 export default async function(req, res) {
   const { restaurantId } = req.query;
-  const url = requestUrls[restaurantId];
+
+  const restaurant = resturants.find(r => r.id === restaurantId);
+  if (!restaurant) {
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "text/html");
+    res.end("<h1>Server Error</h1><p>Unknown restaurant</p>");
+  }
+  console.log("restaurant:", restaurant);
 
   let browser;
   try {
@@ -49,13 +45,15 @@ export default async function(req, res) {
       }
     });
 
-    await page.goto(url);
+    console.log("restaurant.url:", restaurant.url);
+    await page.goto(restaurant.url);
 
     try {
       if (url === "https://www.restavracija123.si/?restaurantid=213") {
         await page.waitForSelector(".jed-levo", { timeout: 3000 });
       }
       const content = await page.content();
+      console.log("content:", content);
       const data = parsers[restaurantId](content);
       res.json(data);
     } catch (e) {

@@ -5,141 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { format, isAfter } from "date-fns";
 
-const styles = theme => ({
-  root: {
-    padding: "10px"
-  },
-  paper: {
-    maxWidth: "500px",
-    padding: "10px",
-    margin: "0px 20px 20px 0px"
-  },
-  topBar: {
-    display: "flex",
-    alignItems: "flex-end",
-    marginBottom: "20px"
-  },
-  restaurants: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr 1fr",
-    gridTemplateRows: "1fr 1fr 1fr 1fr",
-    gridTemplateAreas:
-      '"vinka gastro piap rozaslon" "vinka barbado favola rozaslon" "vinka vivo restavracija123 gostilna1987" "vinka vivo restavracija123 gostilna1987"',
-    [theme.breakpoints.down("md")]: {
-      display: "flex",
-      flexWrap: "wrap"
-    }
-  },
-  restaurantName: {
-    fontWeight: "bold"
-  },
-  menuItem: {
-    fontSize: "1rem"
-  },
-  vinka: {
-    gridArea: "vinka",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  gastro: {
-    gridArea: "gastro",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  barbado: {
-    gridArea: "barbado",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  piap: {
-    gridArea: "piap",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  favola: {
-    gridArea: "favola",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  restavracija123: {
-    gridArea: "restavracija123",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  rozaSlon: {
-    gridArea: "rozaslon",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  gostilna1987: {
-    gridArea: "gostilna1987",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  vivo: {
-    gridArea: "vivo",
-    width: "calc(100% - 20px)",
-    height: "calc(100% - 20px)"
-  },
-  title: {
-    marginRight: "11px"
-  },
-  loaderWrapper: {
-    height: "calc(100% - 40px)",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
-
-const initialRestaurants = [
-  {
-    id: "vinka",
-    name: "Vinka",
-    menuItems: undefined
-  },
-  {
-    id: "gastro",
-    name: "Gastro House 151",
-    menuItems: undefined
-  },
-  {
-    id: "restavracija123",
-    name: "Restavracija 123",
-    menuItems: undefined
-  },
-  {
-    id: "barbado",
-    name: "Barbado",
-    menuItems: undefined
-  },
-  {
-    id: "piap",
-    name: "Piap",
-    menuItems: undefined
-  },
-  {
-    id: "favola",
-    name: "Favola",
-    menuItems: undefined
-  },
-  {
-    id: "rozaSlon",
-    name: "Roza Slon",
-    menuItems: undefined
-  },
-  {
-    id: "gostilna1987",
-    name: "Gostilna 1987",
-    menuItems: undefined
-  },
-  {
-    id: "vivo",
-    name: "VIVO D125",
-    menuItems: undefined
-  }
-];
+import initialRestaurants from "../constants/restaurants";
+import styles from "./styles";
 
 const Index = props => {
   const { classes } = props;
@@ -209,7 +76,8 @@ const Index = props => {
           restaurants.map(restaurant => (
             <Paper
               classes={{ root: classes.paper }}
-              className={classes[`${restaurant.id}`]}
+              style={{ gridArea: restaurant.id }}
+              className={classes.restaurantItem}
               key={restaurant.id}
             >
               <Typography
