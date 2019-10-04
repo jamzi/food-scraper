@@ -7,8 +7,7 @@ const styles = theme => {
       padding: "10px"
     },
     paper: {
-      minWidth: "300px",
-      maxWidth: "500px",
+      width: "500px",
       padding: "10px",
       margin: "0px 20px 20px 0px"
     },
@@ -20,6 +19,8 @@ const styles = theme => {
     },
     restaurants: {
       columnCount: 5,
+      columnFill: "balance",
+      height: "calc(100vh - 60px)",
       [theme.breakpoints.up("md")]: {
         columnCount: 2
       },
