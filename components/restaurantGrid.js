@@ -14,7 +14,6 @@ const RestaurantGrid = props => {
         filteredRestaurants.map(restaurant => (
           <Paper
             classes={{ root: classes.paper }}
-            style={{ gridArea: restaurant.id }}
             className={classes.restaurantItem}
             key={restaurant.id}
           >

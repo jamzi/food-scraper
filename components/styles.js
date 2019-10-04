@@ -7,6 +7,7 @@ const styles = theme => {
       padding: "10px"
     },
     paper: {
+      minWidth: "300px",
       maxWidth: "500px",
       padding: "10px",
       margin: "0px 20px 20px 0px"
@@ -18,11 +19,16 @@ const styles = theme => {
       marginBottom: "20px"
     },
     restaurants: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr 1fr 1fr",
-      gridTemplateRows: "1fr 1fr 1fr 1fr",
-      gridTemplateAreas:
-        '"vinka gastro piap rozaSlon" "vinka barbado favola rozaSlon" "vinka vivo restavracija123 gostilna1987" "vinka vivo restavracija123 gostilna1987"',
+      columnCount: 5,
+      [theme.breakpoints.up("md")]: {
+        columnCount: 2
+      },
+      [theme.breakpoints.up("lg")]: {
+        columnCount: 3
+      },
+      [theme.breakpoints.up("xl")]: {
+        columnCount: 4
+      },
       [theme.breakpoints.down("md")]: {
         display: "flex",
         flexWrap: "wrap"
@@ -35,8 +41,7 @@ const styles = theme => {
       fontSize: "1rem"
     },
     restaurantItem: {
-      width: "calc(100% - 20px)",
-      height: "calc(100% - 20px)"
+      display: "inline-block"
     },
     title: {
       marginRight: "11px"
