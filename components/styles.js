@@ -7,7 +7,7 @@ const styles = theme => {
       padding: "10px"
     },
     paper: {
-      width: "500px",
+      width: "400px",
       padding: "10px",
       margin: "0px 20px 20px 0px"
     },
@@ -18,17 +18,16 @@ const styles = theme => {
       marginBottom: "20px"
     },
     restaurants: {
-      columnCount: 5,
       columnFill: "balance",
-      height: "calc(100vh - 60px)",
+      height: "calc(100vh - 100px)",
       [theme.breakpoints.up("md")]: {
-        columnCount: 2
-      },
-      [theme.breakpoints.up("lg")]: {
         columnCount: 3
       },
-      [theme.breakpoints.up("xl")]: {
+      [theme.breakpoints.up("lg")]: {
         columnCount: 4
+      },
+      [theme.breakpoints.up("xl")]: {
+        columnCount: 5
       },
       [theme.breakpoints.down("md")]: {
         display: "flex",

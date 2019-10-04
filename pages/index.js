@@ -19,9 +19,11 @@ const Index = props => {
   const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([]);
 
   useEffect(() => {
-    const br = localStorage.getItem("blacklistedRestaurants");
-    if (br) {
-      setBlacklistedRestaurants(JSON.parse(br));
+    const blacklistedRestaurants = localStorage.getItem(
+      "blacklistedRestaurants"
+    );
+    if (blacklistedRestaurants) {
+      setBlacklistedRestaurants(JSON.parse(blacklistedRestaurants));
       setIsBlacklistLoaded(true);
     }
   }, []);

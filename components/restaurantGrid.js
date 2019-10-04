@@ -11,8 +11,9 @@ const RestaurantGrid = props => {
   return (
     <div className={classes.restaurants}>
       {filteredRestaurants &&
-        filteredRestaurants.map(restaurant => (
+        filteredRestaurants.map((restaurant, i) => (
           <Paper
+            style={{ backgroundColor: restaurant.color }}
             classes={{ root: classes.paper }}
             className={classes.restaurantItem}
             key={restaurant.id}
