@@ -40,6 +40,8 @@ const styles = theme => {
       display: "inline-block"
     },
     title: {
+      display: "flex",
+      alignItems: "center",
       marginRight: "11px"
     },
     loaderWrapper: {
