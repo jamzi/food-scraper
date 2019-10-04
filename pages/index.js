@@ -22,6 +22,8 @@ const Index = props => {
     );
     if (blacklistedRestaurants) {
       setBlacklistedRestaurants(JSON.parse(blacklistedRestaurants));
+    } else {
+      setBlacklistedRestaurants([]);
     }
     setIsBlacklistLoaded(true);
   }, []);

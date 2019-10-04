@@ -65,4 +65,4 @@ export default [
     url: "https://www.vivo.si/vivo-d125-jedilnik/",
     color: brown[50]
   }
-];
+].sort((a, b) => a.name.localeCompare(b.name));
