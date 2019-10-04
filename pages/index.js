@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { Typography, Button, withStyles } from "@material-ui/core";
 import { format, isAfter } from "date-fns";
 
@@ -14,6 +14,7 @@ const Index = props => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isBlacklistLoaded, setIsBlacklistLoaded] = useState(false);
   const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([]);
+  const didMountRef = useRef(false);
 
   useEffect(() => {
     const blacklistedRestaurants = localStorage.getItem(
@@ -26,10 +27,15 @@ const Index = props => {
   }, []);
 
   useEffect(() => {
-    getFood();
-    const interval = setInterval(() => {
+    let interval;
+    if (didMountRef.current) {
       getFood();
-    }, 30 * 60 * 1000);
+      interval = setInterval(() => {
+        getFood();
+      }, 30 * 60 * 1000);
+    } else {
+      didMountRef.current = true;
+    }
     return () => clearInterval(interval);
   }, [blacklistedRestaurants]);
 
