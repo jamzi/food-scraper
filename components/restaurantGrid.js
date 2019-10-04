@@ -1,7 +1,9 @@
-import { withStyles } from "@material-ui/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {
+  Paper,
+  Typography,
+  CircularProgress,
+  withStyles
+} from "@material-ui/core";
 
 import styles, { StyledLink } from "../components/styles";
 

@@ -1,5 +1,4 @@
-import { withStyles } from "@material-ui/styles";
-import Link from "@material-ui/core/Link";
+import { withStyles, Link } from "@material-ui/core";
 
 const styles = theme => {
   return {

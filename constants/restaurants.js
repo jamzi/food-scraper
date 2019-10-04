@@ -1,12 +1,14 @@
-import red from "@material-ui/core/colors/red";
-import pink from "@material-ui/core/colors/pink";
-import purple from "@material-ui/core/colors/purple";
-import indigo from "@material-ui/core/colors/indigo";
-import blue from "@material-ui/core/colors/blue";
-import teal from "@material-ui/core/colors/teal";
-import green from "@material-ui/core/colors/green";
-import orange from "@material-ui/core/colors/orange";
-import brown from "@material-ui/core/colors/brown";
+import {
+  red,
+  pink,
+  purple,
+  indigo,
+  blue,
+  teal,
+  green,
+  orange,
+  brown
+} from "@material-ui/core/colors";
 
 export default [
   {

@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { withStyles } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Checkbox from "@material-ui/core/Checkbox";
+import {
+  withStyles,
+  Button,
+  Dialog,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  DialogContent,
+  DialogActions,
+  Checkbox
+} from "@material-ui/core";
 
 import styles from "../../components/styles";
 
