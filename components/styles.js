@@ -40,9 +40,11 @@ const styles = theme => {
       display: "inline-block"
     },
     title: {
-      display: "flex",
-      alignItems: "center",
       marginRight: "11px"
+    },
+    titleWrapper: {
+      display: "flex",
+      alignItems: "flex-end"
     },
     loaderWrapper: {
       height: "calc(100% - 40px)",

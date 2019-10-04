@@ -88,7 +88,7 @@ const Index = props => {
   return (
     <div className={classes.root}>
       <div className={classes.topBar}>
-        <div>
+        <div className={classes.titleWrapper}>
           <Typography
             variant="h4"
             component="h2"
