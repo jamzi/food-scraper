@@ -2,7 +2,6 @@ import { useEffect, useState, useMemo } from "react";
 import { withStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { format, isAfter } from "date-fns";
 
 import initialRestaurants from "../constants/restaurants";

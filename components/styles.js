@@ -7,7 +7,7 @@ const styles = theme => {
       padding: "10px"
     },
     paper: {
-      width: "400px",
+      width: "100%",
       padding: "10px",
       margin: "0px 20px 20px 0px"
     },
@@ -18,16 +18,12 @@ const styles = theme => {
       marginBottom: "20px"
     },
     restaurants: {
-      columnFill: "balance",
-      height: "calc(100vh - 100px)",
+      columns: "4 450px",
       [theme.breakpoints.up("md")]: {
         columnCount: 3
       },
       [theme.breakpoints.up("lg")]: {
         columnCount: 4
-      },
-      [theme.breakpoints.up("xl")]: {
-        columnCount: 5
       },
       [theme.breakpoints.down("md")]: {
         display: "flex",
