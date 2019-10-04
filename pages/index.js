@@ -24,8 +24,8 @@ const Index = props => {
     );
     if (blacklistedRestaurants) {
       setBlacklistedRestaurants(JSON.parse(blacklistedRestaurants));
-      setIsBlacklistLoaded(true);
     }
+    setIsBlacklistLoaded(true);
   }, []);
 
   useEffect(() => {
