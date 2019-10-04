@@ -14,14 +14,14 @@ const Index = props => {
   const [restaurants, setRestaurants] = useState(initialRestaurants);
   const [updatedAt, setUpdatedAt] = useState(undefined);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([
-    "vinka",
-    "gastro",
-    "rozaSlon",
-    "barbado",
-    "vivo",
-    "piap"
-  ]);
+  const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([]);
+
+  useEffect(() => {
+    const br = localStorage.getItem("blacklistedRestaurants");
+    if (br) {
+      setBlacklistedRestaurants(JSON.parse(br));
+    }
+  }, []);
 
   useEffect(() => {
     getFood();
@@ -46,8 +46,12 @@ const Index = props => {
     }, []);
   }, [blacklistedRestaurants]);
 
+  const handleSetBlacklist = blacklist => {
+    setBlacklistedRestaurants(blacklist);
+    localStorage.setItem("blacklistedRestaurants", JSON.stringify(blacklist));
+  };
+
   const getFood = async () => {
-    console.log("blacklisted:", blacklistedRestaurants);
     filteredRestaurants.forEach(async restaurant => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
@@ -106,7 +110,7 @@ const Index = props => {
       <RestaurantGrid filteredRestaurants={filteredRestaurants} />
       <SelectRestaurantsDialog
         blacklistedRestaurants={blacklistedRestaurants}
-        setBlacklistedRestaurants={setBlacklistedRestaurants}
+        setBlacklistedRestaurants={handleSetBlacklist}
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
         restaurants={restaurants}
