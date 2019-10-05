@@ -6,6 +6,7 @@ import initialRestaurants from "../constants/restaurants";
 import styles from "../components/styles";
 import RestaurantGrid from "../components/restaurantGrid";
 import SelectRestaurantsDialog from "../components/dialogs/selectRestaurants";
+import { sendEvent, categories } from "../helpers/analytics";
 
 const Index = props => {
   const { classes } = props;
@@ -91,6 +92,14 @@ const Index = props => {
     });
   };
 
+  const handleOpenSelectRestaurants = () => {
+    setDialogOpen(true);
+    sendEvent({
+      category: categories.SELECT_RESTAURANTS,
+      action: "Open Select Restaurant"
+    });
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.topBar}>
@@ -112,7 +121,7 @@ const Index = props => {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => setDialogOpen(true)}
+          onClick={handleOpenSelectRestaurants}
         >
           Select Restaurants
         </Button>
