@@ -1,5 +1,4 @@
-import { withStyles } from "@material-ui/styles";
-import Link from "@material-ui/core/Link";
+import { withStyles, Link } from "@material-ui/core";
 
 const styles = theme => {
   return {
@@ -7,21 +6,24 @@ const styles = theme => {
       padding: "10px"
     },
     paper: {
-      maxWidth: "500px",
+      width: "100%",
       padding: "10px",
       margin: "0px 20px 20px 0px"
     },
     topBar: {
       display: "flex",
-      alignItems: "flex-end",
+      alignItems: "center",
+      justifyContent: "space-between",
       marginBottom: "20px"
     },
     restaurants: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr 1fr 1fr",
-      gridTemplateRows: "1fr 1fr 1fr 1fr",
-      gridTemplateAreas:
-        '"vinka gastro piap rozaSlon" "vinka barbado favola rozaSlon" "vinka vivo restavracija123 gostilna1987" "vinka vivo restavracija123 gostilna1987"',
+      columns: "4 450px",
+      [theme.breakpoints.up("md")]: {
+        columnCount: 3
+      },
+      [theme.breakpoints.up("lg")]: {
+        columnCount: 4
+      },
       [theme.breakpoints.down("md")]: {
         display: "flex",
         flexWrap: "wrap"
@@ -34,11 +36,14 @@ const styles = theme => {
       fontSize: "1rem"
     },
     restaurantItem: {
-      width: "calc(100% - 20px)",
-      height: "calc(100% - 20px)"
+      display: "inline-block"
     },
     title: {
       marginRight: "11px"
+    },
+    titleWrapper: {
+      display: "flex",
+      alignItems: "flex-end"
     },
     loaderWrapper: {
       height: "calc(100% - 40px)",
