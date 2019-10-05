@@ -85,7 +85,6 @@ const SelectRestaurants = props => {
                       handleBlacklistRestaurant(restaurant.id, checked)
                     }
                     color="primary"
-                    value="gilad"
                   />
                 }
                 label={restaurant.name}
