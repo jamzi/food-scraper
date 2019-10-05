@@ -57,23 +57,31 @@ const SelectRestaurants = props => {
     }
   };
 
+  const areArraysDifferent = (arr1, arr2) => {
+    return arr1.join(",") !== arr2.join(",");
+  };
+
   const handleSave = () => {
     setBlacklistedRestaurants(currentBlacklistedRestaurants);
 
     if (
-      currentBlacklistedRestaurants &&
-      currentBlacklistedRestaurants.length > 0
+      areArraysDifferent(blacklistedRestaurants, currentBlacklistedRestaurants)
     ) {
-      sendEvent({
-        category: categories.SELECT_RESTAURANTS,
-        action: "Save Blacklisted Restaurant",
-        label: currentBlacklistedRestaurants.join(",")
-      });
-    } else {
-      sendEvent({
-        category: categories.SELECT_RESTAURANTS,
-        action: "Clear Blacklisted Restaurant"
-      });
+      if (
+        currentBlacklistedRestaurants &&
+        currentBlacklistedRestaurants.length > 0
+      ) {
+        sendEvent({
+          category: categories.SELECT_RESTAURANTS,
+          action: "Save Blacklisted Restaurant",
+          label: currentBlacklistedRestaurants.join(",")
+        });
+      } else {
+        sendEvent({
+          category: categories.SELECT_RESTAURANTS,
+          action: "Clear Blacklisted Restaurant"
+        });
+      }
     }
 
     handleClose();
