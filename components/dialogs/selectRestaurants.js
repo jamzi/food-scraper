@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 import styles from "../../components/styles";
+import { sendEvent, categories } from "../../helpers/analytics";
 
 const SelectRestaurants = props => {
   const {
@@ -58,6 +59,23 @@ const SelectRestaurants = props => {
 
   const handleSave = () => {
     setBlacklistedRestaurants(currentBlacklistedRestaurants);
+
+    if (
+      currentBlacklistedRestaurants &&
+      currentBlacklistedRestaurants.length > 0
+    ) {
+      sendEvent({
+        category: categories.SELECT_RESTAURANTS,
+        action: "Save Blacklisted Restaurant",
+        label: currentBlacklistedRestaurants.join(",")
+      });
+    } else {
+      sendEvent({
+        category: categories.SELECT_RESTAURANTS,
+        action: "Clear Blacklisted Restaurant"
+      });
+    }
+
     handleClose();
   };
 
