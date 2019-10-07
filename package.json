@@ -1,6 +1,6 @@
 {
   "name": "food-scraper",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "server:dev": "nodemon server-dev.js",
