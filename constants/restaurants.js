@@ -8,7 +8,7 @@ import {
   green,
   orange,
   brown,
-  lightBlue
+  lime
 } from "@material-ui/core/colors";
 
 export default [
@@ -70,6 +70,6 @@ export default [
     id: "bistroSumi",
     name: "Bistro Šumi",
     url: "https://www.studentska-prehrana.si/sl/restaurant/Details/1465",
-    color: lightBlue[50]
+    color: lime[50]
   }
 ].sort((a, b) => a.name.localeCompare(b.name));
