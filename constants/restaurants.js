@@ -38,7 +38,7 @@ export default [
   {
     id: "favola",
     name: "Favola",
-    url: "http://www.kaval-group.si/FAVOLA,,ponudba/kosila",
+    url: "https://favola.si/",
     color: teal[50]
   },
   {

@@ -37,13 +37,14 @@ function restavracija123(data) {
 }
 
 function favola(response) {
-  const currentDate = new Date();
-  const dateOfTheWeek = currentDate.getDay();
-
   const $ = cheerio.load(response, { decodeEntities: false });
-  const menuItems = $(`.show.show-${dateOfTheWeek - 1} > p`)
+
+  const menuItems = $(`.eael-tabs-content .active > p`)
     .map((i, el) => {
-      return i % 2 === 0 ? $(el).html() : "";
+      return $(el)
+        .html()
+        .replace("<br><strong>", " ")
+        .replace("</strong>", "");
     })
     .get();
 
