@@ -163,6 +163,21 @@ function vivo(response) {
   return menuItems.slice(startIndex, endIndex);
 }
 
+function bistroSumi(response) {
+  const $ = cheerio.load(response, { decodeEntities: false });
+
+  const menuItems = $(`#menu-list > .shadow-wrapper`)
+    .map((i, el) => {
+      const title = $(el)
+        .find(".color-blue")
+        .text();
+      return title;
+    })
+    .get();
+
+  return menuItems;
+}
+
 module.exports = {
   vinka,
   gastro,
@@ -172,5 +187,6 @@ module.exports = {
   barbado,
   rozaSlon,
   gostilna1987,
-  vivo
+  vivo,
+  bistroSumi
 };

@@ -7,7 +7,8 @@ import {
   teal,
   green,
   orange,
-  brown
+  brown,
+  lightBlue
 } from "@material-ui/core/colors";
 
 export default [
@@ -64,5 +65,11 @@ export default [
     name: "VIVO D125",
     url: "https://www.vivo.si/vivo-d125-jedilnik/",
     color: brown[50]
+  },
+  {
+    id: "bistroSumi",
+    name: "Bistro Šumi",
+    url: "https://www.studentska-prehrana.si/sl/restaurant/Details/1465",
+    color: lightBlue[50]
   }
 ].sort((a, b) => a.name.localeCompare(b.name));
