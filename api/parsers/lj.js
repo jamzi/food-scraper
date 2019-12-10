@@ -116,24 +116,29 @@ function gostilna1987(response) {
 function vivo(response) {
   const $ = cheerio.load(response);
 
-  const menuItemsMonThu = $(".widget.widget_text .wpb_wrapper > p")
-    .map((i, el) => {
-      return $(el)
-        .text()
-        .replace(/\*/g, "");
-    })
-    .get();
+  const dayMenu = $(".wpb_wrapper h3 strong, .wpb_wrapper > p");
 
-  const menuItemsFri = $(".widget.widget_text .wpb_content_element > p")
-    .map((i, el) => {
-      return $(el)
-        .text()
-        .replace(/\*/g, "");
-    })
-    .get();
-
-  const menuItems = [...menuItemsMonThu, ...menuItemsFri];
-
+  dayMenu.map((i, el) => {
+    const node = $(el).text();
+    return node;
+  });
+  
+  const parsedMenu = [];
+  dayMenu.each((i, el) => {
+    const text = $(el).text();
+    if(
+      text !== '***' 
+      && text !== ' ' 
+      && text !== ' ' 
+      && text !== '' 
+      && text !== '\n'
+      && text !== 'DOBRODOŠLI IN DOBER TEK!'
+    ){
+      parsedMenu.push(text);
+    }
+  });
+  parsedMenu.pop();
+ 
   const currentDate = new Date();
   const dateOfTheWeek = currentDate.getDay();
 
@@ -148,9 +153,9 @@ function vivo(response) {
   const [today, tomorrow] = dayMapper[dateOfTheWeek];
 
   let startIndex = 0;
-  let endIndex = menuItems.length - 1;
+  let endIndex = parsedMenu.length - 1;
 
-  menuItems.forEach((item, i) => {
+  parsedMenu.forEach((item, i) => {
     const uppercasedItem = item.toUpperCase();
     if (uppercasedItem.includes(today)) {
       startIndex = i + 1;
@@ -159,8 +164,8 @@ function vivo(response) {
       endIndex = i;
     }
   });
-
-  return menuItems.slice(startIndex, endIndex);
+  
+  return parsedMenu.slice(startIndex, endIndex);
 }
 
 function bistroSumi(response) {
