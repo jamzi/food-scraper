@@ -39,7 +39,12 @@ function restavracija123(data) {
 function favola(response) {
   const $ = cheerio.load(response, { decodeEntities: false });
 
-  const menuItems = $(`.eael-tabs-content .active > p`)
+  const currentDate = new Date();
+  const dayOfTheWeek = currentDate.getDay();
+
+  const menuItems = $(
+    `.eael-tabs-content .clearfix:nth-child(${dayOfTheWeek}) > p`
+  )
     .map((i, el) => {
       return $(el)
         .html()
@@ -122,23 +127,23 @@ function vivo(response) {
     const node = $(el).text();
     return node;
   });
-  
+
   const parsedMenu = [];
   dayMenu.each((i, el) => {
     const text = $(el).text();
-    if(
-      text !== '***' 
-      && text !== ' ' 
-      && text !== ' ' 
-      && text !== '' 
-      && text !== '\n'
-      && text !== 'DOBRODOŠLI IN DOBER TEK!'
-    ){
+    if (
+      text !== "***" &&
+      text !== " " &&
+      text !== " " &&
+      text !== "" &&
+      text !== "\n" &&
+      text !== "DOBRODOŠLI IN DOBER TEK!"
+    ) {
       parsedMenu.push(text);
     }
   });
   parsedMenu.pop();
- 
+
   const currentDate = new Date();
   const dateOfTheWeek = currentDate.getDay();
 
@@ -164,7 +169,7 @@ function vivo(response) {
       endIndex = i;
     }
   });
-  
+
   return parsedMenu.slice(startIndex, endIndex);
 }
 
