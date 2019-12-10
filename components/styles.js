@@ -8,13 +8,20 @@ const styles = theme => {
     paper: {
       width: "100%",
       padding: "10px",
-      margin: "0px 20px 20px 0px"
+      margin: "0px 20px 20px 0px",
+      [theme.breakpoints.down("sm")]: {
+        marginRight: "0px"
+      }
     },
     topBar: {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      marginBottom: "20px"
+      marginBottom: "20px",
+      [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        marginBottom: "10px"
+      }
     },
     restaurants: {
       columns: "4 450px",
