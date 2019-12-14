@@ -22,5 +22,12 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "GOOGLE_ANALYTICS_TRACKER_ID": "@food-scraper-google-analytics-tracker-id",
+      "HOTJAR_HJID": "@food-scraper-hotjar-hjid",
+      "HOTJAR_HJSV": "@food-scraper-hotjar-hjsv"
+    }
+  }
 }

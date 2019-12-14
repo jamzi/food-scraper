@@ -1,15 +1,17 @@
 import ReactGA from "react-ga";
 
-export const categories = {
-  SELECT_RESTAURANTS: "SELECT_RESTAURANTS"
+export const initGA = () => {
+  if (!process.env.GOOGLE_ANALYTICS_TRACKER_ID) {
+    return;
+  }
+  ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKER_ID, {
+    debug: true,
+    testMode: process.env.NODE_ENV === "development"
+  });
 };
 
-export const initGA = () => {
-  ReactGA.initialize("UA-149454652-1", {
-    titleCase: false,
-    testMode: process.env.NODE_ENV === "development",
-    debug: false /* Set to true to test out new events */
-  });
+export const categories = {
+  SELECT_RESTAURANTS: "SELECT_RESTAURANTS"
 };
 
 export const logPageView = () => {

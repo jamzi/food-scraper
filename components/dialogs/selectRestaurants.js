@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 import styles from "../../components/styles";
-import { sendEvent, categories } from "../../helpers/analytics";
+import { sendEvent, categories } from "../../utils/analytics";
 
 const SelectRestaurants = props => {
   const {

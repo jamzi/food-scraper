@@ -6,7 +6,7 @@ import initialRestaurants from "../constants/restaurants";
 import styles from "../components/styles";
 import RestaurantGrid from "../components/restaurantGrid";
 import SelectRestaurantsDialog from "../components/dialogs/selectRestaurants";
-import { sendEvent, categories } from "../helpers/analytics";
+import { sendEvent, categories } from "../utils/analytics";
 
 const Index = props => {
   const { classes } = props;
