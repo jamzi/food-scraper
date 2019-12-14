@@ -5,7 +5,7 @@ export const initGA = () => {
     return;
   }
   ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKER_ID, {
-    debug: true,
+    debug: false,
     testMode: process.env.NODE_ENV === "development"
   });
 };

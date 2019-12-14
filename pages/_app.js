@@ -13,19 +13,15 @@ class MyApp extends App {
   componentDidMount() {
     if (!window.GA_INITIALIZED) {
       initGA();
-      if (
-        process.env.HOTJAR_HJID &&
-        process.env.HOTJAR_HJSV &&
-        process.env.NODE_ENV === "production"
-      ) {
-        hotjar.initialize(
-          parseInt(process.env.HOTJAR_HJID),
-          parseInt(process.env.HOTJAR_HJSV)
-        );
-      }
       window.GA_INITIALIZED = true;
     }
     logPageView();
+    if (process.env.HOTJAR_HJID && process.env.HOTJAR_HJSV) {
+      hotjar.initialize(
+        parseInt(process.env.HOTJAR_HJID),
+        parseInt(process.env.HOTJAR_HJSV)
+      );
+    }
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
