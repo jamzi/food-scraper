@@ -48,8 +48,7 @@ function favola(response) {
     .map((i, el) => {
       return $(el)
         .html()
-        .replace("<br><strong>", " ")
-        .replace("</strong>", "");
+        .replace(/<\/?[^>]+(>|$)/g, "");
     })
     .get();
 
@@ -121,56 +120,27 @@ function gostilna1987(response) {
 function vivo(response) {
   const $ = cheerio.load(response);
 
-  const dayMenu = $(".wpb_wrapper h3 strong, .wpb_wrapper > p");
-
-  dayMenu.map((i, el) => {
-    const node = $(el).text();
-    return node;
-  });
-
-  const parsedMenu = [];
-  dayMenu.each((i, el) => {
-    const text = $(el).text();
-    if (
-      text !== "***" &&
-      text !== " " &&
-      text !== " " &&
-      text !== "" &&
-      text !== "\n" &&
-      text !== "DOBRODOŠLI IN DOBER TEK!"
-    ) {
-      parsedMenu.push(text);
-    }
-  });
-  parsedMenu.pop();
+  const daySelector = {
+    1: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div.wpb_wrapper > div > div > div:nth-child(2)",
+    2: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div.wpb_wrapper > div > div > div:nth-child(2)",
+    3: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)",
+    4: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(4)",
+    5: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(4) > div:nth-child(7)"
+  };
 
   const currentDate = new Date();
   const dateOfTheWeek = currentDate.getDay();
 
-  const dayMapper = {
-    1: ["PONEDELJEK", "TOREK"],
-    2: ["TOREK", "SREDA"],
-    3: ["SREDA", "ČETRTEK"],
-    4: ["ČETRTEK", "PETEK"],
-    5: ["PETEK", "SOBOTA"]
-  };
-
-  const [today, tomorrow] = dayMapper[dateOfTheWeek];
-
-  let startIndex = 0;
-  let endIndex = parsedMenu.length - 1;
-
-  parsedMenu.forEach((item, i) => {
-    const uppercasedItem = item.toUpperCase();
-    if (uppercasedItem.includes(today)) {
-      startIndex = i + 1;
-    }
-    if (uppercasedItem.includes(tomorrow)) {
-      endIndex = i;
+  const menuItems = [];
+  $(`${daySelector[dateOfTheWeek]} > p`).each((i, elm) => {
+    const title = $(elm)
+      .text()
+      .trim();
+    if (title) {
+      menuItems.push(title);
     }
   });
-
-  return parsedMenu.slice(startIndex, endIndex);
+  return menuItems;
 }
 
 function bistroSumi(response) {
