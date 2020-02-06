@@ -6,7 +6,7 @@ import initialRestaurants from "../constants/restaurants";
 import styles from "../components/styles";
 import RestaurantGrid from "../components/restaurantGrid";
 import SelectRestaurantsDialog from "../components/dialogs/selectRestaurants";
-import { sendEvent, categories } from "../utils/analytics";
+import { logEvent, categories } from "../utils/analytics";
 
 const Index = props => {
   const { classes } = props;
@@ -94,7 +94,7 @@ const Index = props => {
 
   const handleOpenSelectRestaurants = () => {
     setDialogOpen(true);
-    sendEvent({
+    logEvent({
       category: categories.SELECT_RESTAURANTS,
       action: "Open Select Restaurant"
     });

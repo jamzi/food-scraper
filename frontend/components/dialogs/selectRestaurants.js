@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 import styles from "../../components/styles";
-import { sendEvent, categories } from "../../utils/analytics";
+import { logEvent, categories } from "../../utils/analytics";
 
 const SelectRestaurants = props => {
   const {
@@ -71,13 +71,13 @@ const SelectRestaurants = props => {
         currentBlacklistedRestaurants &&
         currentBlacklistedRestaurants.length > 0
       ) {
-        sendEvent({
+        logEvent({
           category: categories.SELECT_RESTAURANTS,
           action: "Save Blacklisted Restaurant",
           label: currentBlacklistedRestaurants.join(",")
         });
       } else {
-        sendEvent({
+        logEvent({
           category: categories.SELECT_RESTAURANTS,
           action: "Clear Blacklisted Restaurant"
         });
