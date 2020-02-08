@@ -13,6 +13,7 @@ import {
 
 import styles from "../styles";
 import { logEvent, categories } from "../../utils/analytics";
+import Restaurant from "../../models/Restaurant";
 
 interface Props {
   classes: any;
@@ -20,7 +21,7 @@ interface Props {
   setBlacklistedRestaurants(currentBlacklistedRestaurants: string[]): void;
   dialogOpen: boolean;
   setDialogOpen(state: boolean): void;
-  restaurants: any[];
+  restaurants: Restaurant[];
 }
 
 const SelectRestaurants = (props: Props) => {

@@ -4,7 +4,7 @@ import { initGA, logPageView } from "../utils/analytics";
 
 declare global {
   interface Window {
-    GA_INITIALIZED: any;
+    GA_INITIALIZED: boolean;
   }
 }
 

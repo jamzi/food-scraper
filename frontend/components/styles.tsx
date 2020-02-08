@@ -1,7 +1,7 @@
-import { withStyles, Link, Theme } from "@material-ui/core";
+import { withStyles, Link, Theme, createStyles } from "@material-ui/core";
 
-const styles = (theme: Theme): any => {
-  return {
+const styles = (theme: Theme) =>
+  createStyles({
     root: {
       padding: "10px"
     },
@@ -59,8 +59,7 @@ const styles = (theme: Theme): any => {
       alignItems: "center",
       justifyContent: "center"
     }
-  };
-};
+  });
 
 export const StyledLink = withStyles({
   root: {

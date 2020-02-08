@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ErrorInfo } from "react";
 import App from "next/app";
 import Head from "next/head";
 import * as Sentry from "@sentry/browser";
