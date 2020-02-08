@@ -76,7 +76,7 @@ const Index = (props: Props) => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
           ? `api/food?id=${restaurant.id}&url=${restaurant.url}`
-          : `http://localhost:9999/api/food?id=${restaurant.id}&url=${restaurant.url}`
+          : `http://localhost:5000/?id=${restaurant.id}&url=${restaurant.url}`
       );
       const data = await response.json();
       setRestaurants((restaurants: Restaurant[]) => {

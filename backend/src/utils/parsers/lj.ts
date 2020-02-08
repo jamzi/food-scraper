@@ -78,6 +78,7 @@ function barbado(response) {
 }
 
 function rozaSlon(response) {
+  console.log("rozaSlon:");
   const $ = cheerio.load(response);
 
   const menuItems = [];
@@ -158,7 +159,7 @@ function bistroSumi(response) {
   return menuItems;
 }
 
-module.exports = {
+export default {
   vinka,
   gastro,
   restavracija123,
