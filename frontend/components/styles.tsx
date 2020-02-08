@@ -1,6 +1,6 @@
-import { withStyles, Link } from "@material-ui/core";
+import { withStyles, Link, Theme } from "@material-ui/core";
 
-const styles = theme => {
+const styles = (theme: Theme): any => {
   return {
     root: {
       padding: "10px"

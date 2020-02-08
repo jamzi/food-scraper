@@ -11,7 +11,9 @@ import {
   lime
 } from "@material-ui/core/colors";
 
-export default [
+import Restaurant from "../models/Restaurant";
+
+const restaurants: Restaurant[] = [
   {
     id: "vinka",
     name: "Vinka",
@@ -73,3 +75,5 @@ export default [
     color: lime[50]
   }
 ].sort((a, b) => a.name.localeCompare(b.name));
+
+export default restaurants;

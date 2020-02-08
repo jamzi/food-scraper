@@ -5,15 +5,21 @@ import {
   withStyles
 } from "@material-ui/core";
 
-import styles, { StyledLink } from "../components/styles";
+import styles, { StyledLink } from "./styles";
+import Restaurant from "../models/Restaurant";
 
-const RestaurantGrid = props => {
+interface Props {
+  classes: any;
+  filteredRestaurants: Restaurant[];
+}
+
+const RestaurantGrid = (props: Props) => {
   const { classes, filteredRestaurants } = props;
 
   return (
     <div className={classes.restaurants}>
       {filteredRestaurants &&
-        filteredRestaurants.map((restaurant, i) => (
+        filteredRestaurants.map(restaurant => (
           <Paper
             style={{ backgroundColor: restaurant.color }}
             classes={{ root: classes.paper }}
@@ -22,7 +28,6 @@ const RestaurantGrid = props => {
           >
             <StyledLink
               variant="h5"
-              component="h3"
               classes={{ root: classes.restaurantName }}
               onClick={() => window.open(restaurant.url, "_blank")}
             >

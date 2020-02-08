@@ -7,14 +7,23 @@ import styles from "../components/styles";
 import RestaurantGrid from "../components/restaurantGrid";
 import SelectRestaurantsDialog from "../components/dialogs/selectRestaurants";
 import { logEvent, categories } from "../utils/analytics";
+import Restaurant from "../models/Restaurant";
 
-const Index = props => {
+interface Props {
+  classes: any;
+}
+
+const Index = (props: Props) => {
   const { classes } = props;
-  const [restaurants, setRestaurants] = useState(initialRestaurants);
-  const [updatedAt, setUpdatedAt] = useState(undefined);
+  const [restaurants, setRestaurants] = useState<Restaurant[]>(
+    initialRestaurants
+  );
+  const [updatedAt, setUpdatedAt] = useState<Date | undefined>(undefined);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isBlacklistLoaded, setIsBlacklistLoaded] = useState(false);
-  const [blacklistedRestaurants, setBlacklistedRestaurants] = useState([]);
+  const [blacklistedRestaurants, setBlacklistedRestaurants] = useState<
+    string[]
+  >([]);
   const didMountRef = useRef(false);
 
   useEffect(() => {
@@ -30,7 +39,7 @@ const Index = props => {
   }, []);
 
   useEffect(() => {
-    let interval;
+    let interval: NodeJS.Timeout;
     if (didMountRef.current) {
       getFood();
       interval = setInterval(() => {
@@ -46,7 +55,7 @@ const Index = props => {
     if (!restaurants) {
       return [];
     }
-    return restaurants.reduce((acc, restaurant) => {
+    return restaurants.reduce((acc: Restaurant[], restaurant: Restaurant) => {
       const blacklistIndex = blacklistedRestaurants.findIndex(
         bId => bId === restaurant.id
       );
@@ -57,20 +66,20 @@ const Index = props => {
     }, []);
   }, [blacklistedRestaurants]);
 
-  const handleSetBlacklist = blacklist => {
+  const handleSetBlacklist = (blacklist: string[]) => {
     setBlacklistedRestaurants(blacklist);
     localStorage.setItem("blacklistedRestaurantIds", JSON.stringify(blacklist));
   };
 
   const getFood = async () => {
-    filteredRestaurants.forEach(async restaurant => {
+    filteredRestaurants.forEach(async (restaurant: Restaurant) => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
           ? `api/food?id=${restaurant.id}&url=${restaurant.url}`
           : `http://localhost:9999/api/food?id=${restaurant.id}&url=${restaurant.url}`
       );
       const data = await response.json();
-      setRestaurants(restaurants => {
+      setRestaurants((restaurants: Restaurant[]) => {
         const newRestaurants = [...restaurants];
         let restaurant = newRestaurants.find(r => r.id === data.id);
         if (restaurant) {
@@ -78,7 +87,7 @@ const Index = props => {
         }
         return newRestaurants;
       });
-      setUpdatedAt(updatedAt => {
+      setUpdatedAt((updatedAt: Date | undefined) => {
         const dateHeader = response.headers.get("date");
         if (!dateHeader) {
           return;

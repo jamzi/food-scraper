@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   withStyles,
   Button,
@@ -11,10 +11,19 @@ import {
   Checkbox
 } from "@material-ui/core";
 
-import styles from "../../components/styles";
+import styles from "../styles";
 import { logEvent, categories } from "../../utils/analytics";
 
-const SelectRestaurants = props => {
+interface Props {
+  classes: any;
+  blacklistedRestaurants: string[];
+  setBlacklistedRestaurants(currentBlacklistedRestaurants: string[]): void;
+  dialogOpen: boolean;
+  setDialogOpen(state: boolean): void;
+  restaurants: any[];
+}
+
+const SelectRestaurants = (props: Props) => {
   const {
     classes,
     blacklistedRestaurants,
@@ -27,9 +36,9 @@ const SelectRestaurants = props => {
   const [
     currentBlacklistedRestaurants,
     setCurrentBlacklistedRestaurants
-  ] = useState([]);
+  ] = useState<string[]>([]);
 
-  const isRestaurantBlacklisted = id => {
+  const isRestaurantBlacklisted = (id: string) => {
     if (!id) {
       return false;
     }
@@ -38,7 +47,7 @@ const SelectRestaurants = props => {
     return index !== -1 ? true : false;
   };
 
-  const handleBlacklistRestaurant = (id, checked) => {
+  const handleBlacklistRestaurant = (id: string, checked: boolean) => {
     const blacklistIndex = currentBlacklistedRestaurants.findIndex(
       bId => bId === id
     );
@@ -57,7 +66,7 @@ const SelectRestaurants = props => {
     }
   };
 
-  const areArraysDifferent = (arr1, arr2) => {
+  const areArraysDifferent = (arr1: string[], arr2: string[]) => {
     return arr1.join(",") !== arr2.join(",");
   };
 
@@ -107,7 +116,7 @@ const SelectRestaurants = props => {
                 control={
                   <Checkbox
                     checked={!isRestaurantBlacklisted(restaurant.id)}
-                    onChange={(e, checked) =>
+                    onChange={(_, checked: boolean) =>
                       handleBlacklistRestaurant(restaurant.id, checked)
                     }
                     color="primary"
