@@ -16,7 +16,7 @@
     }
   ],
   "routes": [
-    { "src": "/(.+)", "dest": "/www/$1" },
-    { "src": "/", "dest": "/www/index.html" }
+    { "src": "/(.+)", "dest": "/frontend/$1" },
+    { "src": "/", "dest": "/frontend/index.html" }
   ]
 }
