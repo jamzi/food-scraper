@@ -75,7 +75,7 @@ const Index = (props: Props) => {
     filteredRestaurants.forEach(async (restaurant: Restaurant) => {
       const response = await fetch(
         process.env.NODE_ENV === "production"
-          ? `api/food?id=${restaurant.id}&url=${restaurant.url}`
+          ? `https://food-267613.appspot.com/?id=${restaurant.id}&url=${restaurant.url}`
           : `http://localhost:5000/?id=${restaurant.id}&url=${restaurant.url}`
       );
       const data = await response.json();
