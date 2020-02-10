@@ -10,14 +10,18 @@
   },
   "builds": [
     {
-      "src": "frontend/package.json",
+      "src": "/frontend/package.json",
       "use": "@now/next"
     }
   ],
   "routes": [
     {
-      "src": "^(.*)$",
-      "dest": "frontend/$1"
+      "src": "/",
+      "dest": "/frontend/index"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
     }
   ]
 }
