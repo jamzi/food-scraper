@@ -7,5 +7,16 @@
       "HOTJAR_HJID": "@food-scraper-hotjar-hjid",
       "HOTJAR_HJSV": "@food-scraper-hotjar-hjsv"
     }
-  }
+  },
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "routes": [
+    { "src": "/(.+)", "dest": "/www/$1" },
+    { "src": "/", "dest": "/www/index.html" }
+  ]
 }
