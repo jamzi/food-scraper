@@ -9,7 +9,7 @@ export const initGA = () => {
   ) {
     return;
   }
-  ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKER_ID, { debug: true });
+  ReactGA.initialize(process.env.GOOGLE_ANALYTICS_TRACKER_ID, { debug: false });
 };
 
 export const categories = {

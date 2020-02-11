@@ -14,14 +14,5 @@
       "use": "@now/next"
     }
   ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/frontend/index"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
-    }
-  ]
+  "routes": [{ "src": "/(.*)", "dest": "/frontend/$1" }]
 }
