@@ -6,8 +6,8 @@ import * as FileSync from "lowdb/adapters/FileSync";
 
 import IControllerBase from "interfaces/IControllerBase";
 import parsers from "../utils/parsers/lj";
-import restaurants from "../../../frontend/constants/restaurants";
-import Restaurant from "../../../frontend/models/Restaurant";
+import Restaurant from "../interfaces/Restaurant";
+import restaurants from "../constants/restaurants";
 
 class HomeController implements IControllerBase {
   public path = "/";
