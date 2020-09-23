@@ -42,7 +42,8 @@ function favola(response) {
       return $(el)
         .html()
         .replace(/<br>/g, " ")
-        .replace(/<[^>]*>/g, "");
+        .replace(/<[^>]*>/g, "")
+        .trim();
     })
     .get();
 
@@ -103,26 +104,18 @@ function gostilna1987(response) {
 }
 
 function vivo(response) {
-  const $ = cheerio.load(response);
+  const $ = cheerio.load(response, { decodeEntities: false });
 
-  const daySelector = {
-    1: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div.wpb_wrapper > div > div > div:nth-child(2)",
-    2: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div.wpb_wrapper > div > div > div:nth-child(2)",
-    3: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)",
-    4: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(4)",
-    5: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(4) > div:nth-child(7)",
-  };
+  const menuItems = $(`#primary .textwidget > h3`)
+    .map((i, el) => {
+      const item = $(el).html();
+      if (/<[^>]*>/g.test(item)) {
+        return;
+      }
+      return item;
+    })
+    .get();
 
-  const currentDate = new Date();
-  const dateOfTheWeek = currentDate.getDay();
-
-  const menuItems = [];
-  $(`${daySelector[dateOfTheWeek]} > p`).each((i, elm) => {
-    const title = $(elm).text().trim();
-    if (title) {
-      menuItems.push(title);
-    }
-  });
   return menuItems;
 }
 

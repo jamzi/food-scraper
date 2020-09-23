@@ -10,7 +10,7 @@ if (isProd) {
 
 const parsers = require("./parsers/lj");
 
-module.exports = async function(req, res) {
+module.exports = async function (req, res) {
   const { id, url } = req.query;
 
   if (!id) {
@@ -24,13 +24,13 @@ module.exports = async function(req, res) {
     browser = await puppeteer.launch({
       args: chrome.args,
       executablePath: await chrome.executablePath,
-      headless: true
+      headless: true,
     });
 
     const page = await browser.newPage();
     await page.setRequestInterception(true);
 
-    page.on("request", req => {
+    page.on("request", (req) => {
       if (
         req.resourceType() == "stylesheet" ||
         req.resourceType() == "font" ||
