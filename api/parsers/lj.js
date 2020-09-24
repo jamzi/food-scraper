@@ -26,9 +26,7 @@ function restavracija123(data) {
   const $ = cheerio.load(data);
   const menuItems = $(".jed-levo")
     .map((i, el) => {
-      const title = $(el)
-        .find(".jed-title")
-        .text();
+      const title = $(el).find(".jed-title").text();
       return title;
     })
     .get();
@@ -39,16 +37,13 @@ function restavracija123(data) {
 function favola(response) {
   const $ = cheerio.load(response, { decodeEntities: false });
 
-  const currentDate = new Date();
-  const dayOfTheWeek = currentDate.getDay();
-
-  const menuItems = $(
-    `.eael-tabs-content .clearfix:nth-child(${dayOfTheWeek}) > p`
-  )
+  const menuItems = $(`.elementor-text-editor > p`)
     .map((i, el) => {
       return $(el)
         .html()
-        .replace(/<\/?[^>]+(>|$)/g, "");
+        .replace(/<br>/g, " ")
+        .replace(/<[^>]*>/g, "")
+        .trim();
     })
     .get();
 
@@ -83,18 +78,11 @@ function rozaSlon(response) {
   const menuItems = [];
   const blocks = ["avia-builder-el-13", "avia-builder-el-27"];
 
-  blocks.forEach(block => {
+  blocks.forEach((block) => {
     $(`.${block} > .av-catalogue-list li`).each((i, elm) => {
-      const title = $(elm)
-        .find(".av-catalogue-title")
-        .text();
-      const description = $(elm)
-        .find(".av-catalogue-content")
-        .text()
-        .trim();
-      const price = $(elm)
-        .find(".av-catalogue-price")
-        .text();
+      const title = $(elm).find(".av-catalogue-title").text();
+      const description = $(elm).find(".av-catalogue-content").text().trim();
+      const price = $(elm).find(".av-catalogue-price").text();
 
       menuItems.push(`${title} (${description}) ${price}`);
     });
@@ -108,9 +96,7 @@ function gostilna1987(response) {
 
   const menuItems = $(".is-selected .wpb_wrapper > p")
     .map((i, el) => {
-      return $(el)
-        .text()
-        .replace(/\*/g, "");
+      return $(el).text().replace(/\*/g, "");
     })
     .get();
 
@@ -118,28 +104,18 @@ function gostilna1987(response) {
 }
 
 function vivo(response) {
-  const $ = cheerio.load(response);
+  const $ = cheerio.load(response, { decodeEntities: false });
 
-  const daySelector = {
-    1: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div.wpb_wrapper > div > div > div:nth-child(2)",
-    2: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div.wpb_wrapper > div > div > div:nth-child(2)",
-    3: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)",
-    4: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(4)",
-    5: "#post-3154 > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div.wpb_text_column.wpb_content_element > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(4) > div:nth-child(7)"
-  };
+  const menuItems = $(`#primary .textwidget > h3`)
+    .map((i, el) => {
+      const item = $(el).html();
+      if (/<[^>]*>/g.test(item)) {
+        return;
+      }
+      return item;
+    })
+    .get();
 
-  const currentDate = new Date();
-  const dateOfTheWeek = currentDate.getDay();
-
-  const menuItems = [];
-  $(`${daySelector[dateOfTheWeek]} > p`).each((i, elm) => {
-    const title = $(elm)
-      .text()
-      .trim();
-    if (title) {
-      menuItems.push(title);
-    }
-  });
   return menuItems;
 }
 
@@ -148,9 +124,7 @@ function bistroSumi(response) {
 
   const menuItems = $(`#menu-list > .shadow-wrapper`)
     .map((i, el) => {
-      const title = $(el)
-        .find(".color-blue")
-        .text();
+      const title = $(el).find(".color-blue").text();
       return title;
     })
     .get();
@@ -168,5 +142,5 @@ module.exports = {
   rozaSlon,
   gostilna1987,
   vivo,
-  bistroSumi
+  bistroSumi,
 };
