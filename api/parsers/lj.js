@@ -92,15 +92,20 @@ function rozaSlon(response) {
 }
 
 function gostilna1987(response) {
-  const $ = cheerio.load(response);
+  const $ = cheerio.load(response, { decodeEntities: false });
 
-  const menuItems = $(".is-selected .wpb_wrapper > p")
-    .map((i, el) => {
-      return $(el).text().replace(/\*/g, "");
-    })
-    .get();
+  const currentDate = new Date();
+  const dateOfTheWeek = currentDate.getDay(); // 1 - Monday ...
 
-  return menuItems.slice(1, menuItems.length);
+  const sliderItem = $(
+    ` div.col-xs-12:nth-child(${dateOfTheWeek}) > div > div > p`
+  );
+  const menuItems = [];
+  sliderItem.each((i, elm) => {
+    menuItems.push($(elm).text().replace(/\*/g, "").trim());
+  });
+
+  return menuItems;
 }
 
 function vivo(response) {
