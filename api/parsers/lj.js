@@ -105,7 +105,7 @@ function gostilna1987(response) {
     menuItems.push($(elm).text().replace(/\*/g, "").trim());
   });
 
-  return menuItems;
+  return menuItems.splice(1);
 }
 
 function vivo(response) {
