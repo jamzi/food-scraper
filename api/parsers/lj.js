@@ -104,8 +104,7 @@ function gostilna1987(response) {
   sliderItem.each((i, elm) => {
     menuItems.push($(elm).text().replace(/\*/g, "").trim());
   });
-
-  return menuItems.splice(1);
+  return menuItems;
 }
 
 function vivo(response) {
