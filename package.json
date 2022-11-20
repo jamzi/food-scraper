@@ -10,7 +10,7 @@
   "dependencies": {
     "@material-ui/core": "4.4.2",
     "cheerio": "1.0.0-rc.3",
-    "chrome-aws-lambda": "2.1.1",
+    "chrome-aws-lambda": "10.1.0",
     "cors": "2.8.5",
     "date-fns": "2.2.1",
     "express": "4.17.1",
