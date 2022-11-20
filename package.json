@@ -24,7 +24,7 @@
     "cross-env": "5.2.0",
     "react-ga": "2.7.0",
     "react-hotjar": "2.0.4",
-    "dotenv": "8.2.0",
+    "dotenv": "16.0.3",
     "next-compose-plugins": "2.2.0"
   }
 }
